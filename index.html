@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Rolling Fanmade</title>
+        <style>
+            /* 1. GLOBAL & FONTS */
+            @font-face {
+                font-family: 'MyCustomFont';
+                src: url('Sen-Bold.otf') format('opentype');
+                font-weight: normal;
+                font-style: normal;
+            }
+
+            body {
+                font-family: 'MyCustomFont', Arial, sans-serif;
+                text-align: center;
+                margin-top: 50px;
+                color: white;
+                background-image: url('background.png');
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-attachment: fixed; /* Keeps background anchored nicely */
+            }
+
+            /* 2. IMAGE CONTENT */
+            .center-container {
+                text-align: center;
+                margin-bottom: 25px; /* Adds space under the icon image */
+            }
+
+            .center-container img {
+                object-fit: cover; 
+                border-radius: 20%;
+            }
+
+            /* NEW: CAROUSEL / SCREENSHOT PREVIEW STYLES */
+            .screenshot-carousel {
+                position: relative;
+                width: 10%;             /* Responsive width */
+                margin: 20px auto 30px auto; /* Centers the whole container on screen */
+            }
+
+            .screenshot-carousel img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 16px;   /* Smooth rounded edges */
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            }
+
+            .next-arrow-btn {
+                position: absolute;
+                right: 12px;           /* Floats on the right side of the image */
+                top: 50%;
+                transform: translateY(-50%); /* Centers vertically */
+                background-color: rgba(255, 255, 255, 0.25);
+                color: #ffffff;
+                border: none;
+                border-radius: 50%;    /* Perfect circle */
+                width: 40px;
+                height: 40px;
+                font-size: 24px;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                backdrop-filter: blur(4px); /* Modern glassmorphism effect */
+                transition: background-color 0.2s, transform 0.2s;
+            }
+
+            .next-arrow-btn:hover {
+                background-color: rgba(255, 255, 255, 0.45);
+                transform: translateY(-50%) scale(1.05);
+            }
+
+            .next-arrow-btn:active {
+                transform: translateY(-50%) scale(0.95);
+            }
+
+            /* 3. BUTTON CONTAINER & FIXES */
+            .button-wrapper {
+                display: flex;
+                flex-direction: column; /* Stacks buttons on top of each other */
+                align-items: center;    /* Centers them horizontally on the page */
+                gap: 16px;              /* Creates an even gap between the buttons */
+                margin-top: 20px;
+            }
+
+            /* Target the actual buttons instead of the wrapper div */
+            .button-styler {
+                background-color: #373737;
+                color: #ffffff;
+                padding: 14px 32px;      /* Generous padding for clean tap target */
+                font-size: 16px;
+                font-family: 'MyCustomFont', Arial, sans-serif; /* Inherit your custom font */
+                border: none;
+                border-radius: 12px;     /* Smooth rounded style matching your screenshot */
+                cursor: pointer;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                transition: transform 0.2s ease, background-color 0.3s ease;
+                
+                /* The critical fix to prevent stretching */
+                width: 250px;            /* Forces both buttons to be exactly the same clean width */
+            }
+
+            /* Hover & Click Animation Effects */
+            .button-styler:hover {
+                background-color: #181818;
+                transform: translateY(-2px);
+            }
+
+            .button-styler:active {
+                transform: translateY(1px);
+            }
+        </style>
+    </head>
+    <body>
+        <img src="logo.png" alt="Rolling Fanmade Logo" width="200">
+        <h1></h1>
+        <p>But Rolling Sky 1.0.0 Version.....</p>
+        
+        <div class="center-container">
+            <img src="icon.png" alt="Rolling Fanmade" width="100">
+        </div>
+
+        <!-- NEW: Centered, Rounded Screenshot Preview with Next Button -->
+         <h1>Game Screenshot</h1>
+        <div class="screenshot-carousel">
+            <img id="previewImage" src="Banner/1.png" alt="Game Level Preview">
+            <button id="nextImageButton" class="next-arrow-btn" aria-label="Next Level">&#8250;</button>
+        </div>
+
+        <!-- Single clean wrapper container to handle alignment -->
+         <h1>Download & Play Options</h1>
+        <div class="button-wrapper">
+            <button id="downloadButton" class="button-styler">Download for Windows</button>
+            <button id="openButton" class="button-styler">Play in Browser</button>
+            <button id="androidButton" class="button-styler">Download for Android</button>
+        </div>
+
+        <script>
+            // NEW: Array of your gameplay screenshots to cycle through
+            const screenshots = ["Banner/1.png", "Banner/2.png", "Banner/3.png", "Banner/4.png", "Banner/5.png", "Banner/6.png"];
+            let currentIndex = 0;
+
+            document.getElementById("nextImageButton").addEventListener("click", function() {
+                currentIndex = (currentIndex + 1) % screenshots.length;
+                document.getElementById("previewImage").src = screenshots[currentIndex];
+            });
+
+            // EXISTING: Button navigation links
+            document.getElementById("downloadButton").addEventListener("click", function() {
+                window.location.href = "https://github.com/9935355Developer/rolling-fanmade.github.io/releases/download/windows100/rolling-fanmade-1-0-0.exe"; 
+            });
+
+            document.getElementById("openButton").addEventListener("click", function() {
+                window.location.href = "https://9935355developer.github.io/rolling-fanmade.github.io/WebGL/index.html"; 
+            });
+
+            document.getElementById("androidButton").addEventListener("click", function() {
+                alert("Android version coming soon!");
+            });
+        </script>
+    </body>
+</html>
